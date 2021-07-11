@@ -24,6 +24,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - 
+        name: Tag name
+        id: tag_name
+        run: |
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
       -
         name: Build and push
         uses: docker/build-push-action@v2
@@ -31,4 +36,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
-          tags: beabys/centos8_golang:latest --tag beabys/centos8_golang:${{ steps.meta.outputs.tags }} --build-arg GOLANG_VERSION=${{ steps.meta.outputs.tags }} --build-arg CENTOS_VERSION=8
+          tags: beabys/centos8_golang:latest --tag beabys/centos8_golang:${{ steps.branch_name.outputs.SOURCE_TAG }} --build-arg GOLANG_VERSION=${{ steps.branch_name.outputs.SOURCE_TAG }} --build-arg CENTOS_VERSION=8
