@@ -36,4 +36,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ github.repository_owner }}/centos7_golang:latest,${{ github.repository_owner }}/centos7_golang:${{ steps.get_version.outputs.VERSION }} 
-          build-args: GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }}
+          build-args: |
+            GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }}
