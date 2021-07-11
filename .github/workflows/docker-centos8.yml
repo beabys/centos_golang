@@ -31,4 +31,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
-          tags: beabys/centos8_golang:latest . --file Dockerfile --tag beabys/centos8_golang:${{ steps.meta.outputs.tags }} --build-arg GOLANG_VERSION=${{ steps.meta.outputs.tags }} --build-arg CENTOS_VERSION=8
+          tags: beabys/centos8_golang:latest --tag beabys/centos8_golang:${{ steps.meta.outputs.tags }} --build-arg GOLANG_VERSION=${{ steps.meta.outputs.tags }} --build-arg CENTOS_VERSION=8
