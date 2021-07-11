@@ -33,8 +33,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/amd64,linux/arm64
           push: true
-          image: beabys/centos7_golang
           tags: ${{ github.repository_owner }}/centos7_golang:latest,${{ github.repository_owner }}/centos7_golang:${{ steps.get_version.outputs.VERSION }} 
           build-args: GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }}
