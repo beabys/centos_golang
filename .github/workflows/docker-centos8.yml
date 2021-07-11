@@ -38,4 +38,4 @@ jobs:
           push: true
           image: beabys/centos8_golang
           tags: latest,${{ steps.get_version.outputs.VERSION }} 
-          build-arg: GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }},CENTOS_VERSION=8
+          buildArgs: GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }},CENTOS_VERSION=8
