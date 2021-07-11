@@ -35,4 +35,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
-          tags: beabys/centos7_golang:latest --tag beabys/centos7_golang:${{ steps.get_version.outputs.VERSION }} --build-arg GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }}
+          image: beabys/centos7_golang
+          tags: latest,${{ steps.get_version.outputs.VERSION }} 
+          build-arg: GOLANG_VERSION=${{ steps.get_version.outputs.VERSION }}
