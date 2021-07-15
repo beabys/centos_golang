@@ -37,9 +37,22 @@ ENV GOLANG_DOWNLOAD_SHA256=f3989dca4dea5fbadfec253d7c24e4111773b203e677abb1f01e7
 
 #install dependencies
 FROM base-$TARGETARCH-$GOLANG_VERSION
-RUN yum install -y epel-release
-RUN yum install -y tar git openssl-devel make gcc gcc-c++ patch zlib zlib-devel  \
-  cmake libxml2-devel libxslt-devel curl rpm-build bzip2 autoconf automake libtool wget
+RUN yum install -y epel-release && yum update -y
+RUN yum install -y tar openssl-devel make gcc gcc-c++ patch zlib zlib-devel  \
+  cmake libxml2-devel libxslt-devel curl rpm-build bzip2 autoconf automake libtool wget \
+  nano curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker
+
+## install Git
+RUN yum -y remove git
+RUN cd /usr/src && \
+  wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz && \
+  tar xzf git-2.32.0.tar.gz && \
+  cd git-2.32.0 && \
+  make prefix=/usr/local/git all && \
+  make prefix=/usr/local/git install && \
+  echo "export PATH=$PATH:/usr/local/git/bin" >> /root/.bashrc && \
+  source /root/.bashrc
+
 
 # install go
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
