@@ -1,21 +1,21 @@
 ARG CENTOS_VERSION=7
-ARG GOLANG_VERSION=1.16.6
+ARG GOLANG_VERSION=1.16.5
 FROM centos:$CENTOS_VERSION as centos_base
 
 
-FROM centos_base AS base-amd64-1.16.6
+FROM centos_base AS base-amd64-1.16.5
 ARG GOLANG_VERSION=$GOLANG_VERSION
 ARG GOLANG_DOWNLOAD_URL=https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
-ARG GOLANG_DOWNLOAD_SHA256=be333ef18b3016e9d7cb7b1ff1fdb0cac800ca0be4cf2290fe613b3d069dfe0d
+ARG GOLANG_DOWNLOAD_SHA256=b12c23023b68de22f74c0524f10b753e7b08b1504cb7e417eccebdd3fae49061
 FROM centos_base AS base-amd64-1.15.13
 ARG GOLANG_VERSION=$GOLANG_VERSION
 ARG GOLANG_DOWNLOAD_URL=https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_SHA256=3d3beec5fc66659018e09f40abb7274b10794229ba7c1e8bdb7d8ca77b656a13
 
-FROM centos_base AS base-arm64-1.16.6
+FROM centos_base AS base-arm64-1.16.5
 ARG GOLANG_VERSION=$GOLANG_VERSION
 ENV GOLANG_DOWNLOAD_URL=https://golang.org/dl/go$GOLANG_VERSION.linux-arm64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256=9e38047463da6daecab9017cd0599f33f84991e68263752cfab49253bbc98c30
+ENV GOLANG_DOWNLOAD_SHA256=d5446b46ef6f36fdffa852f73dfbbe78c1ddf010b99fa4964944b9ae8b4d6799
 FROM centos_base AS base-arm64-1.15.13
 ARG GOLANG_VERSION=$GOLANG_VERSION
 ENV GOLANG_DOWNLOAD_URL=https://golang.org/dl/go$GOLANG_VERSION.linux-arm64.tar.gz
@@ -43,7 +43,7 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256 golang.tar.gz" | sha256sum -c - \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
-
+  
 ENV PATH /usr/local/git/bin:/go/bin:/usr/local/go/bin:$PATH
 
 RUN echo "export PATH=$PATH" >> /root/.bashrc && \
