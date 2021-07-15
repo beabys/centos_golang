@@ -36,10 +36,7 @@ RUN cd /usr/src && \
   tar xzf git-2.32.0.tar.gz && \
   cd git-2.32.0 && \
   make prefix=/usr/local/git all && \
-  make prefix=/usr/local/git install && \
-  echo "export PATH=$PATH:/usr/local/git/bin" >> /root/.bashrc && \
-  source /root/.bashrc
-
+  make prefix=/usr/local/git install
 
 # install go
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
@@ -47,7 +44,8 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
 
-ENV PATH /go/bin:/usr/local/go/bin:$PATH
+RUN echo "export PATH=$PATH:/usr/local/git/bin:/go/bin:/usr/local/go/bin" >> /root/.bashrc && \
+  source /root/.bashrc
 
 # prepare go-env
 RUN mkdir -p "/go/src" "/go/bin" "/go/pkg" && chmod -R 777 "/go"
