@@ -27,7 +27,7 @@ FROM base-$TARGETARCH-$GOLANG_VERSION
 RUN yum install -y epel-release && yum update -y
 RUN yum install -y tar openssl-devel make gcc gcc-c++ patch zlib zlib-devel  \
   cmake libxml2-devel libxslt-devel curl rpm-build bzip2 autoconf automake libtool wget \
-  nano curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker openssh-client
+  nano curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker openssh-clients
 
 ## install Git
 RUN yum -y remove git
